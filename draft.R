@@ -8,6 +8,7 @@ library(stringr)
 df <- laycUtils::load_txt('./temp_data/raw_enrollment_report.txt')
 ptype <- laycUtils::load_txt('./temp_data/program_type.txt')
 ptype <- select(ptype, program_id, intervention_type)
+dosage <- laycUtils::load_txt('./temp_data/raw_dosage_report.txt')
 
 # Merge data
 df <- dplyr::left_join(df, ptype, by = c('program_id'))
