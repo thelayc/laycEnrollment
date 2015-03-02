@@ -40,7 +40,9 @@ service <- unique(service)
 
 # merge
 df %>%
-  left_join(pos, by = c('id', 'program_id')) ->
+  select(-id) %>%
+  rename(id = subject_id) %>%
+  left_join(service, by = c('id', 'program_id')) ->
   test
 
 test %>% 
@@ -48,6 +50,6 @@ test %>%
   issue
 
 test %>% 
-  filter(!is.na(pos)) %>%
+  filter(!is.na(service)) %>%
   distinct(id) %>%
   count()
