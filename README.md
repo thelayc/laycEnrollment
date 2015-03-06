@@ -1,6 +1,4 @@
 ## TO DO
 
-* Complete touchpoint report
-* Create assessment report
-* Create referrals report
-* Check dismissals with information from all 4 reports
+* Make sure the main function takes a dataframe, not a txt file, so it is easier to pass some subset of the dataset to the function
+
