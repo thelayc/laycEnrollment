@@ -1,7 +1,7 @@
 library(ggplot2)
 library(ggthemes)
 library(laycUtils)
-options(stringsAsFactors = FALSE)
+options(stringsAsFactors = FALSE, digits = 2)
 list.files('./temp_data/')
 library(dplyr)
 library(stringr)
@@ -62,11 +62,12 @@ df %>%
 
 # Plot results
 p <- ggplot(test, aes(x = reorder(intervention_type, av_days))) + coord_flip()
-p <- p + geom_point(aes(y = av_days, color = intervention_type), size = 4)
-p <- p + geom_errorbar(aes(ymin = av_days - std_days, ymax = av_days + std_days, color = intervention_type),
-                       width = .1)
+p <- p + geom_bar(aes(y = av_days, fill = intervention_type), stat = 'identity')
+# p <- p + geom_point(aes(y = av_days, color = intervention_type), size = 4)
+# p <- p + geom_errorbar(aes(ymin = av_days - std_days, ymax = av_days + std_days, color = intervention_type),
+#                        width = .1)
 p <- p + scale_colour_tableau()
-p <- p + theme_few()
+p <- p + theme_layc()
 p
 
 ##########################################
