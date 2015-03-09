@@ -1,9 +1,11 @@
 library(ggplot2)
 library(ggthemes)
+library(laycUtils)
 options(stringsAsFactors = FALSE)
 list.files('./temp_data/')
 library(dplyr)
 library(stringr)
+library(extrafont)
 
 # Set constants
 end_date <- lubridate::mdy('9/30/2014')
@@ -42,11 +44,11 @@ span <- lubridate::new_interval(df$start, df$end) #interval
 df$days <- lubridate::as.period(span, units = "day")
 df$days <- lubridate::day(df$days)
 
-ggplot(df, aes(x = days)) + geom_histogram() + facet_wrap(~intervention_type)
-
-
-
-
+p <- ggplot(df, aes(x = days)) + geom_histogram() + facet_wrap(~intervention_type)
+p <- p + theme_layc()
+p <- p + ggtitle('qwertyuiopasdfghjklzxcvbnm\n')
+p <- p + theme(plot.title = element_text(size = rel(5), face = 'bold'))
+p
 
 
 # Number of participants served by program area
