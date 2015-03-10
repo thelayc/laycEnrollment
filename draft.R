@@ -24,25 +24,7 @@ df <- dplyr::left_join(df, ptype, by = c('program_id'))
 #headers <- names(df)
 #headers[1] <- 'id'
 #names(df) <- headers
-df$days_enrolled <- as.numeric(df$days_enrolled)
-# TO DO: ELIMINATE NEXT LINES, SHOULD BE DONE OUTSIDE THE MAIN FUNCTION
-keep <- !str_detect(df$program_name, '^rb -')
-df <- filter(df, keep)
 
-#df %>% filter(id == '64,392') -> df
-
-## TO DO: CREATE A CLEAN FUNCTION
-# Clean end date
-df$end <- lubridate::mdy(df$end)
-df$end[is.na(df$end)] <- end_date
-# Clean start date
-df$start <- lubridate::mdy(df$start)
-df$start[df$start < start_date] <- start_date
-
-span <- lubridate::new_interval(df$start, df$end) #interval
-
-df$days <- lubridate::as.period(span, units = "day")
-df$days <- lubridate::day(df$days)
 
 p <- ggplot(df, aes(x = days)) + geom_histogram() + facet_wrap(~intervention_type)
 p <- p + theme_layc()
