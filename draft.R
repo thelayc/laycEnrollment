@@ -15,7 +15,7 @@ start_date <- lubridate::mdy('1/1/2008')
 df <- laycUtils::load_txt('../temp_data/fy14/raw_enrollment_report.txt')
 ptype <- laycUtils::load_txt('../temp_data/fy14/program_type.txt')
 ptype <- select(ptype, program_id, intervention_type)
-dosage <- laycUtils::load_txt('../temp_data/fy14/raw_pos_report.txt')
+#dosage <- laycUtils::load_txt('../temp_data/fy14/raw_pos_report.txt')
 
 # Merge data
 df <- dplyr::left_join(df, ptype, by = c('program_id'))
@@ -66,7 +66,7 @@ p <- p + geom_bar(aes(y = av_days, fill = intervention_type), stat = 'identity')
 # p <- p + geom_point(aes(y = av_days, color = intervention_type), size = 4)
 # p <- p + geom_errorbar(aes(ymin = av_days - std_days, ymax = av_days + std_days, color = intervention_type),
 #                        width = .1)
-p <- p + scale_colour_tableau()
+p <- p + scale_fill_tableau()
 p <- p + theme_layc()
 p
 
