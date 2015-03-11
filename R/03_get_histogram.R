@@ -3,6 +3,7 @@
 #' Create a multiple histograms representing enrollment length by programt type (workforce, education, etc.)
 #' @param df dataframe: a dataframe returned by the get_summary() function
 #' @export
+#' @import ggplot2
 #' @return dataframe
 #' @examples
 #' enroll <- laycUtils::load_txt('./my_data_folder/enrollment.txt')

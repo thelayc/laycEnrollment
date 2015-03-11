@@ -3,6 +3,7 @@
 #' Compute summary statistics about enrollment, by program type (education, workforce, etc.)
 #' @param df dataframe: a dataframe returned by the clean_df() function
 #' @export
+#' @import dplyr
 #' @return dataframe
 #' @examples
 #' enroll <- laycUtils::load_txt('./my_data_folder/enrollment.txt')
