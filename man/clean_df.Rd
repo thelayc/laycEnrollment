@@ -4,7 +4,7 @@
 \alias{clean_df}
 \title{clean_df()}
 \usage{
-clean_df(enroll_data, program_type, start_date = "01/01/2008",
+clean_df(enroll_data, program_type, start_date = NULL,
   end_date = Sys.Date())
 }
 \arguments{

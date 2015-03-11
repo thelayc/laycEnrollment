@@ -13,7 +13,7 @@
 #' clean_df(enroll_data = enroll, program_type = ptype)
 
 clean_df <- function(enroll_data, program_type,
-                     start_date = '01/01/2008',
+                     start_date = NULL,
                      end_date = Sys.Date()) {
   # Remove extra columns for a cleaner merge with enroll_data
   program_type <- dplyr::select_(program_type, ~program_id, ~intervention_type)
@@ -30,9 +30,11 @@ clean_df <- function(enroll_data, program_type,
   enroll_data$end[is.na(enroll_data$end)] <- end_date
   enroll_data$end[enroll_data$end > end_date] <- end_date
   # Clean start date
-  start_date <- lubridate::mdy(start_date)
   enroll_data$start <- lubridate::mdy(enroll_data$start)
-  enroll_data$start[enroll_data$start < start_date] <- start_date
+  if (!is.null(start_date)) {
+    start_date <- lubridate::mdy(start_date)
+    enroll_data$start[enroll_data$start < start_date] <- start_date
+  }
   # Compute enrollment time (in days)
   span <- lubridate::new_interval(enroll_data$start, enroll_data$end) #interval
   enroll_data$days <- lubridate::as.period(span, units = "day")
