@@ -1,7 +1,7 @@
 #' get_histogram()
 #'
 #' Create a multiple histograms representing enrollment length by programt type (workforce, education, etc.)
-#' @param df dataframe: a dataframe returned by the get_summary() function
+#' @param df dataframe: a dataframe returned by the clean_df() function
 #' @export
 #' @import ggplot2
 #' @return dataframe
@@ -9,8 +9,7 @@
 #' enroll <- laycUtils::load_txt('./my_data_folder/enrollment.txt')
 #' ptype <- laycUtils::load_txt('./my_data_folder/program_type.txt')
 #' df <- clean_df(enroll_data = enroll, program_type = ptype)
-#' summary <- get_summary(df)
-#' get_histogram(summary)
+#' get_histogram(df)
 
 get_histogram <- function(df) {
 ggplot(df, aes(x = days)) +

@@ -7,7 +7,7 @@
 get_histogram(df)
 }
 \arguments{
-\item{df}{dataframe: a dataframe returned by the get_summary() function}
+\item{df}{dataframe: a dataframe returned by the clean_df() function}
 }
 \value{
 dataframe
@@ -19,7 +19,6 @@ Create a multiple histograms representing enrollment length by programt type (wo
 enroll <- laycUtils::load_txt('./my_data_folder/enrollment.txt')
 ptype <- laycUtils::load_txt('./my_data_folder/program_type.txt')
 df <- clean_df(enroll_data = enroll, program_type = ptype)
-summary <- get_summary(df)
-get_histogram(summary)
+get_histogram(df)
 }
 
