@@ -12,9 +12,10 @@
 
 get_summary <- function(df){
   df %>%
-    group_by_(~intervention_type) %>%
-    summarise_(n = ~length(id),
-               av_days = ~mean(days),
-               std_days = ~sd(days)) ->
+    dplyr::group_by_(~intervention_type) %>%
+    dplyr::summarise_(n = ~length(id),
+                      av_days = ~mean(days),
+                      std_days = ~sd(days)) %>%
+    dplyr:: arrange_(~n) ->
     df
 }
