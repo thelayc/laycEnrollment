@@ -16,6 +16,6 @@ get_summary <- function(df){
     dplyr::summarise_(n = ~length(id),
                       av_days = ~mean(days),
                       std_days = ~sd(days)) %>%
-    dplyr:: arrange_(~n) ->
+    dplyr:: arrange_(~desc(n)) ->
     df
 }
