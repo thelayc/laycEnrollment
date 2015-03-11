@@ -19,7 +19,7 @@ plot_summary <- function(df) {
   df$max <- as.factor(df$max)
 
   p <- ggplot(df, aes(x = reorder(intervention_type, av_days))) +
-    geom_bar(aes(y = av_days, fill = df$max), stat = 'identity') +
+    geom_bar(aes(y = av_days, fill = max), stat = 'identity') +
     geom_text(aes(y = av_days + ymax / 25, label = round(av_days, 0)), size = rel(4), fontface = 'bold') +
     scale_fill_manual(values = c('#474747', '#C00000')) +
     laycUtils::theme_layc() +
