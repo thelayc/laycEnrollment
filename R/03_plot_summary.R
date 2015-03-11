@@ -14,12 +14,12 @@
 
 plot_summary <- function(df) {
   ymax <- max(df$av_days)
-  df$max <- NA
   df$max[df$av_days == ymax] <- 1
   df$max[df$av_days < ymax] <- 0
+  df$max <- as.factor(df$max)
 
   p <- ggplot(df, aes(x = reorder(intervention_type, av_days))) +
-    geom_bar(aes(y = av_days, fill = as.factor(df$max)), stat = 'identity') +
+    geom_bar(aes(y = av_days, fill = df$max), stat = 'identity') +
     geom_text(aes(y = av_days + ymax / 25, label = round(av_days, 0)), size = rel(4), fontface = 'bold') +
     scale_fill_manual(values = c('#474747', '#C00000')) +
     laycUtils::theme_layc() +
@@ -34,5 +34,7 @@ plot_summary <- function(df) {
       panel.border = element_blank(),
       legend.position = 'none'
     )
+
+  return(p)
 }
 
