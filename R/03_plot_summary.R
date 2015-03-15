@@ -18,7 +18,9 @@ plot_summary <- function(df) {
   df$max[df$av_days < ymax] <- 0
   df$max <- as.factor(df$max)
 
-  p <- ggplot(df, aes(x = reorder(intervention_type, av_days))) +
+  p <- ggplot(df, 
+              aes(x = reorder(intervention_type, av_days)), 
+              environment = environment()) +
     geom_bar(aes(y = av_days, fill = max), stat = 'identity') +
     geom_text(aes(y = av_days + ymax / 25, label = round(av_days, 0)), size = rel(4), fontface = 'bold') +
     scale_fill_manual(values = c('#474747', '#C00000')) +
