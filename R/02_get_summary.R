@@ -19,4 +19,6 @@ get_summary <- function(df){
                       std_days = ~sd(days)) %>%
     dplyr:: arrange_(~desc(n)) ->
     df
+
+  return(df)
 }
