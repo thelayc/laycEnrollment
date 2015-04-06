@@ -16,7 +16,7 @@ get_enrollment <- function(enroll_data, program_type,
                            start_date = '01/01/2008',
                            end_date = Sys.Date()) {
   # Clean data
-  enroll_data <- clean_df(enroll_data, program_type, start_date = start_date, end_date = end_date)
+  enroll_data <- clean_enroll(enroll_data, program_type, start_date = start_date, end_date = end_date)
   # Generate summary table
   enroll_summary <- get_summary(enroll_data)
 
