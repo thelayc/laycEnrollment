@@ -14,8 +14,14 @@
 
 get_enroll <- function(enroll_data, eto_programs = NULL, min_enroll = 8)
 {
+
+  # CHECK inputs validity
+  assertthat::assert_that(is.data.frame(enroll_data))
+  assertthat::assert_that(is.character(eto_programs))
+  assertthat::assert_that(is.numeric(min_enroll))
+
   # Subset data if necessary
-  if(!is.null(eto_programs)) {
+  if (!is.null(eto_programs)) {
     enroll_data <- enroll_data[enroll_data$program_name %in% eto_programs, ]
   }
 
