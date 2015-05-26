@@ -17,32 +17,38 @@
 clean_enroll <- function(enroll_data, program_type,
                      start_date = NULL,
                      end_date = Sys.Date()) {
-  
+
+  # CHECK inputs validity
+  assertthat::assert_that(is.data.frame(enroll_data))
+  assertthat::assert_that(is.data.frame(program_type))
+  assertthat::assert_that(is.character(start_date) | is.null(start_date))
+  assertthat::assert_that(is.character(end_date) | class(end_date) == "Date")
+
   # Remove extra columns for a cleaner merge with enroll_data
   program_type <- dplyr::select_(program_type, ~program_id, ~intervention_type)
-  
+
   # Clean end date
-  if(class(end_date) == "Date") {
+  if (class(end_date) == "Date") {
     end_date <- as.character(end_date)
     end_date <- lubridate::ymd(end_date)
   } else {
     end_date <- lubridate::mdy(end_date)
   }
-  
+
   enroll_data$end[is.na(enroll_data$end)] <- end_date
   enroll_data$end[enroll_data$end > end_date] <- end_date
-  
+
   # Clean start date
   if (!is.null(start_date)) {
     start_date <- lubridate::mdy(start_date)
     enroll_data$start[enroll_data$start < start_date] <- start_date
   }
-  
+
   # Compute enrollment time (in days)
   span <- lubridate::new_interval(enroll_data$start, enroll_data$end) #interval
   enroll_data$days <- lubridate::as.period(span, units = "day")
   enroll_data$days <- lubridate::day(enroll_data$days)
-  
+
   # Merge dataframes
   enroll_data <- dplyr::left_join(enroll_data, program_type, by = c('program_id'))
 

@@ -20,7 +20,7 @@ get_enrollment <- function(enroll_data, program_type,
   assertthat::assert_that(is.data.frame(enroll_data))
   assertthat::assert_that(is.data.frame(program_type))
   assertthat::assert_that(is.character(start_date))
-  assertthat::assert_that(is.character(end_date))
+  assertthat::assert_that(is.character(end_date) | class(end_date) == "Date")
 
   # Clean data
   enroll_data <- clean_enroll(enroll_data, program_type, start_date = start_date, end_date = end_date)
