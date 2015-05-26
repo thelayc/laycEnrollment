@@ -15,8 +15,16 @@
 get_enrollment <- function(enroll_data, program_type,
                            start_date = '01/01/2008',
                            end_date = Sys.Date()) {
+
+  # CHECK inputs validity
+  assertthat::assert_that(is.data.frame(enroll_data))
+  assertthat::assert_that(is.data.frame(program_type))
+  assertthat::assert_that(is.character(start_date))
+  assertthat::assert_that(is.character(end_date))
+
   # Clean data
   enroll_data <- clean_enroll(enroll_data, program_type, start_date = start_date, end_date = end_date)
+
   # Generate summary table
   enroll_summary <- get_summary(enroll_data)
 
